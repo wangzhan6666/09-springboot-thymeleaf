@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--Thymeleaf的常见属性-->
+      <!--属性th:action——start:动态传form表单的数据(PS:不用动态时可以使用普通的表单)-->
+        <form id="login" th:action="@{/boot/login}">
+        </form>
+      <!--属性th:action——end:动态传form表单的数据(PS:不用动态时可以使用普通的表单)-->
+
+      <!--属性th:each——start:循环遍历功能(PS:List集合)-->
+        <p><font color="blue">属性th:each:循环遍历功能(PS:List集合)：</font></p>
+        <p th:each="user:${userList}">
+            id:<span th:text="${user.id}">666</span>
+            nick:<span th:text="${user.nick}">我没有昵称</span>
+            phone:<span th:text="${user.phone}">13692378971</span>
+            email:<span th:text="${user.email}">wangzhan19981005@163.com</span>
+            address:<span th:text="${user.address}">在你的心里</span><br />
+        </p>
+      <!--属性th:each——end:循环遍历功能(PS:List集合)-->
+
+
+      <!--属性th:each——start:循环遍历功能(PS:Map集合)-->
+        <p><font color="blue">属性th:each:循环遍历功能(PS:Map集合)：</font></p>
+        <p th:each="myMapVal:${userMap}">
+            id:<span th:text="${myMapVal.value.id}">666</span>
+            nick:<span th:text="${myMapVal.value.nick}">我没有昵称</span>
+            phone:<span th:text="${myMapVal.value.phone}">13692378971</span>
+            email:<span th:text="${myMapVal.value.email}">wangzhan19981005@163.com</span>
+            address:<span th:text="${myMapVal.value.address}">在你的心里</span><br />
+        </p>
+       <!--属性th:each——end:循环遍历功能(PS:Map集合)-->
+
+
+       <!--属性th:each——start:循环遍历功能(PS:数组)-->
+        <p><font color="blue">属性th:each:循环遍历功能(PS:数组)：</font></p>
+        <p th:each="myArray:${userArray}">
+            id:<span th:text="${myArray.id}">666</span>
+            nick:<span th:text="${myArray.nick}">我没有昵称</span>
+            phone:<span th:text="${myArray.phone}">13692378971</span>
+            email:<span th:text="${myArray.email}">wangzhan19981005@163.com</span>
+            address:<span th:text="${myArray.address}">在你的心里</span><br />
+        </p>
+       <!--属性th:each——end:循环遍历功能(PS:数组)-->
+
+
+
+       <!--属性th:id——start:-->
+          <p><font color="red">属性th:id:</font></p>
+          <span th:id="${username}">aaa</span>
+       <!--属性th:id——end:-->
+
+        <!--属性th:if——start:-->
+          <p><font color="red">属性th:if:</font></p>
+          <span th:if="${sex == '1'}">男</span>
+          <span th:if="${sex == '2'}">女</span>
+        <!--属性th:if——end:-->
+
+
+        <!--属性th:unless——start:(PS:与th:if相反)-->
+        <p><font color="red">属性th:unless(PS:与th:if相反):</font></p>
+        <span th:unless="${sex == '1'}">男</span>
+        <span th:unless="${sex == '2'}">女</span>
+        <!--属性th:unless——end:(PS:与th:if相反)-->
+
+
+        <!--属性th:switch/th:case——start-->
+        <p><font color="red">属性th:switch/th:case:</font></p>
+        <div th:switch="${sex}">
+            <p th:case="1">性别：男</p>
+            <p th:case="2">性别：女</p>
+            <p th:case="*">性别：未知</p>
+        </div>
+        <!--属性th:switch/th:case——end-->
+
+        <!--属性th:src(PS:引入js和img)——start-->
+        <p><font color="red">属性th:src(PS:引入js和img):</font></p>
+        <img th:src="@{/image/xixi.jpg}"/>
+        <!--属性th:src(PS:引入js和img)——end-->
+
+
+        <!--属性th:text——start-->
+        <p><font color="red">属性th:text:</font></p>
+        <input type="text" id="nick" name="nick" th:text="${user.nick}"/>
+        <!--属性th:text——end-->
+
+
+        <!--属性th:value——start-->
+        <p><font color="red">属性th:value:</font></p>
+        <input type="text" id="phone" name="phone" th:value="${user.phone}"/>
+        <!--属性th:value——end-->
+
+
+        <!--属性th:attr——start-->
+        <p><font color="red">属性th:attr:</font></p>
+        <input type="text" id="phone1" name="phone1" th:attr="value=${user.phone}"/>
+        <!--属性th:attr——end-->
+
+
+        <!--属性th:onclick(PS:内容要加单引号)——start-->
+        <p><font color="red">属性th:onclick(PS:内容要加单引号):</font></p>
+        <input type="button" id="click" name="click" value="点击我" th:onclick="'clickMe()'"/>
+        <script>
+            function clickMe() {
+                alert("恭喜你，使用th:onclick属性成功！！");
+            }
+        </script>
+        <!--属性th:onclick(PS:内容要加单引号)——end-->
+
+
+        <!--属性th:style(PS:内容要加单引号)——start-->
+        <p><font color="red">属性th:style(PS:内容要加单引号):</font></p>
+        <div th:style="'display:block;'">
+            去源代码查看这些属性
+        </div>
+        <!--属性th:style(PS:内容要加单引号)——end-->
+
+
+        <!--属性th:method——start:设置请求方法-->
+       <p><font color="red">属性th:method:</font></p>
+        <form id="login2" th:action="@{/boot/login}" th:method="post">
+            为了显示有form，随便写的内容，哈哈哈哈哈
+        </form>
+        <!--属性th:method——end:设置请求方法-->
+
+
+        <!--属性th:name——start:设置表单名称-->
+        <p><font color="red">属性th:name:</font></p>
+        <input th:type="text" th:id="${user.nick}" th:name="${user.nick}" th:attr="value=${user.phone}"/>
+        <!--属性th:attr——end:设置表单名称-->
+
+
+        <!--属性th:inline(PS:内联文本,要用[[...]])——start-->
+        <p><font color="red">属性th:inline(PS:内联文本):</font></p>
+        <div th:inline="text">
+            电话：[[${user.phone}]]
+        </div>
+        <!--属性th:inline(PS:内联文本)——end-->
+
+
+
+        <!--属性th:inline(PS:内联脚本,要用[[...]])——start-->
+        <p><font color="red">属性th:inline(PS:内联文本):</font></p>
+        <input type="button" id="inline" name="inline" value="测试th:inline的脚本模式" th:onclick="'clickMe()'"/>
+        <script th:inline="javascript" type="text/javascript">
+            function clickMe() {
+                var msg = "Hello, " + [[${user.phone}]];
+                alert(msg);
+            }
+        </script>
+        <!--属性th:inline(PS:内联脚本)——end-->
+
+
+</body>
+</html>

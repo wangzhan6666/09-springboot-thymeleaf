@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--springboot集成Thymeleaf模块例子——start-->
+    <p><font color="#7fff00">springboot集成Thymeleaf模块例子:</font></p>
+    <p th:text="${msg}">
+    </p>
+
+    <div th:text="${msg}">
+    </div>
+
+    <span th:text="${msg}">
+    </span>
+
+<!--springboot集成Thymeleaf模块例子——end-->
+
+
+<!--Thymeleaf的标准表达式——start-->
+    <!--Thymeleaf的 标准 变量表达式的例子——start-->
+        <!--
+            使用Thymeleaf就有以下区别：
+                ①当直接点击该index.html时,显示下面的内容：id:666 nick:我没有昵称等(PS:在该页面span的内容)
+                ②若是发布到Tomcat中访问时，显示下面的内容：id:1 nick:昵称等(PS:在controller类传过来的值)
+        -->
+        <p><font color="blue">Thymeleaf的 标准 变量表达式的例子：</font></p>
+        <p>
+            id:<span th:text="${user.id}">666</span><br />
+            nick:<span th:text="${user.nick}">我没有昵称</span><br />
+            phone:<span th:text="${user.phone}">13692378971</span><br />
+            email:<span th:text="${user.email}">wangzhan19981005@163.com</span><br />
+            address:<span th:text="${user.address}">在你的心里</span><br />
+        </p>
+    <!--Thymeleaf的 标准 变量表达式的例子——end-->
+
+
+    <!--Thymeleaf的 选择 变量表达式的例子——start-->
+        <p><font color="red">Thymeleaf的 选择 变量表达式的例子：</font></p>
+        <div th:object="${user}">
+            id:<span th:text="*{id}">666</span><br />
+            nick:<span th:text="*{nick}">我没有昵称</span><br />
+            phone:<span th:text="*{phone}">13692378971</span><br />
+            email:<span th:text="*{email}">wangzhan19981005@163.com</span><br />
+            address:<span th:text="*{address}">在你的心里</span><br />
+        </div>
+    <!--Thymeleaf的 选择 变量表达式的例子——end-->
+
+
+    <!--Thymeleaf的 标准和选择 变量表达式结合使用的例子——start-->
+        <p><font color="#ff69b4">Thymeleaf的 标准(nick,email)和选择(id,phone,address) 变量表达式结合使用的例子：</font></p>
+        <div th:object="${user}">
+            id:<span th:text="*{id}">666</span><br />
+            nick:<span th:text="${user.nick}">我没有昵称</span><br />
+            phone:<span th:text="*{phone}">13692378971</span><br />
+            email:<span th:text="${user.email}">wangzhan19981005@163.com</span><br />
+            address:<span th:text="*{address}">在你的心里</span><br />
+        </div>
+    <!--Thymeleaf的 标准和选择 变量表达式结合使用的例子——end-->
+
+
+    <!--Thymeleaf的 另一种(不知道叫什么) 变量表达式结合使用的例子——start-->
+        <p><font color="yellow">Thymeleaf的 另一种(不知道叫什么) 变量表达式结合使用的例子：</font></p>
+        <div>
+            id:<span th:text="*{user.id}">666</span><br />
+            nick:<span th:text="*{user.nick}">我没有昵称</span><br />
+            phone:<span th:text="*{user.phone}">13692378971</span><br />
+            email:<span th:text="*{user.email}">wangzhan19981005@163.com</span><br />
+            address:<span th:text="*{user.address}">在你的心里</span><br />
+        </div>
+    <!--Thymeleaf的 另一种(不知道叫什么) 变量表达式结合使用的例子——end-->
+
+
+    <!--Tymeleaf的 URL 表达式的例子——start -->
+           <p><font color="fuchsia">Tymeleaf的 URL 表达式的例子：</font></p>
+           <!--静态传id--><!--页面传回来的：http://localhost:8963/boot/user/info?id=100-->
+           <a href="http://localhost:8963/boot/user/info?id=100">静态传id</a><br />
+           <!--绝对URL动态传id--><!--页面传回来：http://localhost:8963/boot/user/info?id=1-->
+           <a href="info.html" th:href="@{'http://localhost:8963/boot/user/info?id='+${user.id}}">动态传id</a><br />
+           <!--绝对URL动态拼接传id、phone--> <!--?号红,不受影响--><!--页面传回来：http://localhost:8963/boot/user/info?id=1&amp;phone=15920333144-->
+           <a href="info.html" th:href="@{|http://localhost:8963/boot/user/info?id=${user.id}&phone=${user.phone}|}">动态传id</a><br />
+           <!--相对URL，相对于页面,动态传id--><!--页面传回来：user/info?id=1-->
+           <a href="info.html" th:href="@{'user/info?id='+${user.id}}">相对URL，相对于页面,动态传id</a><br />
+           <!--相对URL，相对于项目上下文,动态传id--><!--页面传回来：/09-springboot-thymeleaf/user/info?id=1-->
+           <a href="info.html" th:href="@{'/user/info?id='+${user.id}}">相对URL，相对于项目上下文,动态传id</a><br />
+    <!--Tymeleaf的 URL 表达式的例子——end -->
+
+
+
+<!--Thymeleaf的标准表达式——end-->
+
+
+</body>
+</html>

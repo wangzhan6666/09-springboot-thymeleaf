@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--Thymeleaf 字面量——start-->
+    <!--文本字面量(PS:用单引号'..'包围的字符串为文本字面量)——start-->
+    <p><font color="red">文本字面量(PS:用单引号'..'包围的字符串为文本字面量):</font></p>
+    <a th:href="@{'api/getUser?id=' + ${user.id}}">修改</a>
+    <!--文本字面量(PS:用单引号'..'包围的字符串为文本字面量)——end-->
+
+
+    <!--文本字面量——start-->
+    <p><font color="red">数字字面量:</font></p>
+    <p>今年是<span th:text="2019">1949</span></p>
+    <p>20年后，将是<span th:text="2019 + 20">1969</span></p>
+    <!--文本字面量——end-->
+
+    <!--boolean字面量——start-->
+    <p><font color="red">boolean字面量:</font></p>
+    <p th:if="${isFlag == true}">
+        isFlag为true
+    </p>
+    <!--boolean字面量——end-->
+
+
+    <!--null字面量——start-->
+    <p><font color="red">null字面量:</font></p>
+    <p th:if="${user == null}">
+        user 为 null,显示该段代码
+    </p>
+    <p th:if="${user != null}">
+        user 不为 null,显示该段代码
+    </p>
+    <!--null字面量——end-->
+<!--Thymeleaf 字面量——end-->
+
+
+
+
+<!--Thymeleaf 字符串拼接——start-->
+    <p><font color="red">字符串拼接:</font></p>
+    <span th:text="'原始的字符串拼接:user的id是'+${user.id}+',user的phone是'+${user.phone}"></span><br />
+    <span th:text="|改进的字符串拼接:user的id是${user.id},user的phone是${user.phone}|"></span>
+<!--Thymeleaf 字符串拼接——end-->
+
+
+<!--Thymeleaf 三元运算判断——start-->
+    <p><font color="red">三元运算判断:</font></p>
+    <span th:text="${sex == '1'} ? '男' : '女'">未知</span>
+<!--Thymeleaf 三元运算判断——end-->
+
+
+<!--Thymeleaf 运算和关系判断——start-->
+    <p><font color="red">运算和关系判断:</font></p>
+    <p>算数运算： +, -, *, /, %</p>
+    <p>关系比较： >, <, >=, <=(gt, lt, ge, le)</p>
+    <p>相等判断： ==, !=(eq, ne)</p>
+<!--Thymeleaf 运算和关系判断——end-->
+
+
+<!--Thymeleaf 表达式基本对象——start-->
+    <p><font color="red">表达式基本对象:</font></p>
+    #request的使用：<span th:text="${#request.getAttribute('name')}">name</span><br />
+    #session的使用：<span th:text="${#session.getAttribute('address')}">address</span>
+<!--Thymeleaf 表达式基本对象——end-->
+
+
+
+<!--Thymeleaf 表达式功能对象——start-->
+    <p><font color="red">表达式功能对象:</font></p>
+    #dates:<span th:text="${#dates.format(date,'yyyy-MM-dd HH:mm:ss')}">显示时间</span>
+    。。。。。。等等
+<!--Thymeleaf 表达式功能对象——end-->
+
+</body>
+</html>
